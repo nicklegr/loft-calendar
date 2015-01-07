@@ -28,17 +28,24 @@ class Loft
 
         description = event.at_css('p.month_content').inner_text.strip
 
-        m = event.at_css('p.time_text').inner_text.match(
-          %r|OPEN\s+(?<open_hour>\d+):(?<open_min>\d+)\s+/\s+START\s+(?<start_hour>\d+):(?<start_min>\d+)|
-          )
+        base_time = Time.new(year.to_i, month.to_i, day.to_i)
+        open_at = start_at = base_time
+        time_text = event.at_css('p.time_text')
+        if time_text
+          m = time_text.inner_text.match(
+            %r|OPEN\s+(?<open_hour>\d+):(?<open_min>\d+)\s+/\s+START\s+(?<start_hour>\d+):(?<start_min>\d+)|
+            )
 
-        open_at = Time.new(year.to_i, month.to_i, day.to_i) +
-          m["open_hour"].to_i.hours +
-          m["open_min"].to_i.minutes
+          if m
+            if m["open_hour"] && m["open_min"]
+              open_at = base_time + m["open_hour"].to_i.hours + m["open_min"].to_i.minutes
+            end
 
-        start_at = Time.new(year.to_i, month.to_i, day.to_i) +
-          m["start_hour"].to_i.hours +
-          m["start_min"].to_i.minutes
+            if m["start_hour"] && m["start_min"]
+              start_at = base_time + m["start_hour"].to_i.hours + m["start_min"].to_i.minutes
+            end
+          end
+        end
 
         # puts [day, url, title, event_id, open_at, start_at, description].join(' ')
 
