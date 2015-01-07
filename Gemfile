@@ -10,5 +10,6 @@ gem 'haml'
 gem 'emk-sinatra-url-for'
 
 gem 'nokogiri'
+gem 'activesupport'
 
 gem 'pry'

@@ -2,6 +2,7 @@
 
 require 'open-uri'
 require 'nokogiri'
+require 'active_support/core_ext'
 
 class Loft
   def self.monthly_schedule(live_house, date)
@@ -29,10 +30,12 @@ class Loft
           )
 
         open_at = Time.new(year.to_i, month.to_i, day.to_i) +
-          m["open_hour"].to_i * 3600 + m["open_min"].to_i * 60
+          m["open_hour"].to_i.hours +
+          m["open_min"].to_i.minutes
 
         start_at = Time.new(year.to_i, month.to_i, day.to_i) +
-          m["start_hour"].to_i * 3600 + m["start_min"].to_i * 60
+          m["start_hour"].to_i.hours +
+          m["start_min"].to_i.minutes
 
         # puts [day, url, title, open_at, start_at, description].join(' ')
 
