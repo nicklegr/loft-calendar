@@ -2,7 +2,7 @@
 # coding: utf-8
 
 require 'pp'
-require './db'
+require_relative 'db'
 require_relative 'loft'
 
 class Watch

@@ -1,3 +1,5 @@
+# coding: utf-8
+
 require 'sinatra'
 require 'sinatra/reloader'
 require 'sinatra/url_for'
@@ -5,7 +7,7 @@ require 'haml'
 require 'icalendar'
 require 'active_support'
 require 'active_support/core_ext'
-require './db'
+require_relative 'db'
 
 configure do
   mime_type :ics, "text/calendar"
