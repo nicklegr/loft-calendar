@@ -16,6 +16,8 @@ get '/' do
 end
 
 get '/stats' do
+  @last_update = Event.desc(:updated_at).first.updated_at
+  @event_count = Event.count()
   haml :stats
 end
 
