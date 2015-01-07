@@ -23,6 +23,9 @@ class Loft
         url = title_link["href"]
         title = title_link.inner_text
 
+        # 全ライブハウスでユニークな番号らしい
+        event_id = url[%r|(\d+)/?$|, 1].to_i
+
         description = event.at_css('p.month_content').inner_text.strip
 
         m = event.at_css('p.time_text').inner_text.match(
@@ -37,9 +40,10 @@ class Loft
           m["start_hour"].to_i.hours +
           m["start_min"].to_i.minutes
 
-        # puts [day, url, title, open_at, start_at, description].join(' ')
+        # puts [day, url, title, event_id, open_at, start_at, description].join(' ')
 
         ret << {
+          "event_id" => event_id,
           "url" => url,
           "title" => title,
           "open_at" => open_at,
