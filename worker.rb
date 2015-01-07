@@ -9,7 +9,11 @@ class Watch
   def start
     loop do
       begin
-        pp Loft.monthly_schedule("plusone", Time.now)
+        Loft.all_events.each do |event|
+          record = Event.find_or_initialize_by("event_id" => event["event_id"])
+          record.update(event)
+          record.save!
+        end
       rescue => e
         # 不明なエラーのときも、落ちずに動き続ける
         puts "#{e} (#{e.class})"
