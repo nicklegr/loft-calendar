@@ -1,0 +1,124 @@
+div.clear {
+  clear: both;
+}
+
+img.edit_button {
+  margin-top: -5px;
+  cursor: pointer;
+}
+
+input#task {
+  width: 338px;
+}
+
+div#incoming-tasks {
+  float: left;
+  width: 350px;
+  margin-right: 20px;
+  border: 1px solid silver;
+}
+
+ul#tasks {
+  min-width: 340px;
+  min-height: 440px;
+}
+
+div.name {
+  width: 84%;
+  float: left;
+}
+
+.editing {
+  height: 12px;
+  margin-left: -4px;
+  margin-top: -4px;
+}
+
+div.edit {
+  width: 8%;
+  float: left;
+}
+
+div.delete {
+  width: 8%;
+  float: left;
+}
+
+div#staff-container {
+  width: 350px;
+  height: 325px;
+}
+
+div#staffs {
+}
+
+div.staff {
+  height: 56px;
+  border: 1px solid silver;
+  margin-bottom: 5px;
+}
+
+div.staff-name {
+  height: 23px;
+  padding-left: 5px;
+  background-color: deepskyblue;
+}
+
+ul.assigned-task {
+  width: 340px;
+  height: 30px;
+  padding-top: 1px;
+  padding-left: 10px;
+}
+
+div.add-staff {
+  clear: both;
+  text-align: right;
+}
+
+div#commands {
+  clear: both;
+  width: 350px;
+  height: 125px;
+  border-top: 1px dashed silver;
+}
+
+div#trashs {
+  float: left;
+  width: 33%;
+  margin-top: 45px;
+  text-align: center;
+}
+
+div#trashbox {
+  float: left;
+  width: 33%;
+  padding-left: 36px;
+  padding-top: 16px;
+}
+
+div#undo {
+  float: left;
+  width: 33%;
+  margin-top: 16px;
+}
+
+.sortable { list-style-type: none; margin: 0; padding: 0; width: 60%; }
+.sortable li { margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1.0em; height: 18px; }
+.sortable li span { position: absolute; margin-left: -1.3em; }
+
+.complete-task {
+  color: silver;
+}
+
+/*
+  タスク割り当て済みのSortableにドロップしようとしたとき、
+  リストの既存アイテムが動かないようにする
+*/
+ul.assigned-task > .ui-sortable-placeholder {
+  display: none;
+}
+
+footer {
+  text-align: center;
+}
