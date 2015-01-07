@@ -11,5 +11,6 @@ gem 'emk-sinatra-url-for'
 
 gem 'nokogiri'
 gem 'activesupport'
+gem 'icalendar'
 
 gem 'pry'
