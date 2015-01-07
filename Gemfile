@@ -9,4 +9,6 @@ gem 'thin'
 gem 'haml'
 gem 'emk-sinatra-url-for'
 
+gem 'nokogiri'
+
 gem 'pry'
