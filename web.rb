@@ -32,6 +32,16 @@ get '/*.ics', :provides => [ :ics ] do |live_house|
 
   cal.append_custom_property('X-WR-CALNAME;VALUE=TEXT', name)
 
+  cal.timezone do |t|
+    t.tzid = 'Asia/Tokyo'
+    t.standard do |s|
+      s.tzoffsetfrom = '+0900'
+      s.tzoffsetto   = '+0900'
+      s.tzname       = 'JST'
+      s.dtstart      = '19700101T000000'
+    end
+  end
+
   Event
     .where("live_house" => live_house)
     .where(:open_at.gte => Time.now.beginning_of_month)
