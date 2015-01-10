@@ -8,6 +8,7 @@ require 'icalendar'
 require 'active_support'
 require 'active_support/core_ext'
 require_relative 'db'
+require_relative 'loft'
 
 configure do
   mime_type :ics, "text/calendar"
@@ -24,7 +25,22 @@ get '/stats' do
 end
 
 get '/*.ics', :provides => [ :ics ] do |live_house|
+  name = Loft.live_house_name(live_house)
+  halt(404) unless name
+
   cal = Icalendar::Calendar.new
+
+  cal.append_custom_property('X-WR-CALNAME;VALUE=TEXT', name)
+
+  cal.timezone do |t|
+    t.tzid = 'Asia/Tokyo'
+    t.standard do |s|
+      s.tzoffsetfrom = '+0900'
+      s.tzoffsetto   = '+0900'
+      s.tzname       = 'JST'
+      s.dtstart      = '19700101T000000'
+    end
+  end
 
   Event
     .where("live_house" => live_house)
@@ -38,5 +54,6 @@ get '/*.ics', :provides => [ :ics ] do |live_house|
     end
   end
 
+  cal.publish
   cal.to_ical
 end

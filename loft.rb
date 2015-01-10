@@ -6,21 +6,25 @@ require 'active_support'
 require 'active_support/core_ext'
 
 class Loft
-  LIVE_HOUSES = %w|
-    plusone
-    loft
-    shelter
-    naked
-    lofta
-    west
-    broadcast
-  |
+  LIVE_HOUSES = {
+    "plusone" => "ロフトプラスワン",
+    "loft" => "新宿ロフト",
+    "shelter" => "下北沢シェルター",
+    "naked" => "ネイキッドロフト",
+    "lofta" => "阿佐ヶ谷ロフトA",
+    "west" => "プラスワンWest",
+    "broadcast" => "ロフトチャンネル",
+  }
+
+  def self.live_house_name(key)
+    LIVE_HOUSES[key]
+  end
 
   def self.all_events
     ret = []
     now = Time.now
 
-    LIVE_HOUSES.each do |live_house|
+    LIVE_HOUSES.keys.each do |live_house|
       for month_after in 0..2
         date = now.beginning_of_month + month_after.months
         ret += monthly_schedule(live_house, date).map do |e|
