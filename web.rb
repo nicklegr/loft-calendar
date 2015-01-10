@@ -52,7 +52,7 @@ get '/*.ics', :provides => [ :ics ] do |live_house|
     cal.event do |e|
       e.dtstart = Icalendar::Values::DateTime.new(record.open_at, { 'TZID' => 'Asia/Tokyo' })
       e.summary = record.title
-      e.description = record.url
+      e.description = record.url + "\n\n" + record.description
     end
   end
 
