@@ -30,7 +30,9 @@ get '/*.ics', :provides => [ :ics ] do |live_house|
 
   cal = Icalendar::Calendar.new
 
-  cal.append_custom_property('X-WR-CALNAME;VALUE=TEXT', name)
+  cal.append_custom_property("X-WR-CALNAME", name)
+  cal.append_custom_property("X-WR-TIMEZONE", "Asia/Tokyo")
+  cal.append_custom_property("X-WR-CALDESC", name)
 
   cal.timezone do |t|
     t.tzid = 'Asia/Tokyo'
