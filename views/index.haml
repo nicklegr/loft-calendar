@@ -1,24 +1,17 @@
 %div{ :role => "tabpanel" }
   %ul.nav.nav-tabs{ :role => "tablist" }
-    %li.active{:role => "presentation"}
-      %a{"aria-controls" => "plusone", "data-toggle" => "tab", :href => "#plusone", :role => "tab"} ロフトプラスワン
-    %li{:role => "presentation"}
-      %a{"aria-controls" => "naked", "data-toggle" => "tab", :href => "#naked", :role => "tab"} ネイキッドロフト
-    %li{:role => "presentation"}
-      %a{"aria-controls" => "lofta", "data-toggle" => "tab", :href => "#lofta", :role => "tab"} 阿佐ヶ谷ロフトA
+    - @calendars.each_with_index do |cal, i|
+      %li{:class => ("active" if i == 0), :role => "presentation"}
+        %a{"aria-controls" => cal[:id], "data-toggle" => "tab", :href => "##{cal[:id]}", :role => "tab"}= cal[:name]
 
   .tab-content
-    .tab-pane.active{ :role => "tablist", :id => "plusone" }
-      <iframe src="https://www.google.com/calendar/embed?showTitle=0&amp;showTz=0&amp;height=400&amp;wkst=1&amp;bgcolor=%23FFFFFF&amp;src=ddakjciduejju8u45g3mo02j7nmo720h%40import.calendar.google.com&amp;color=%2323164E&amp;ctz=Asia%2FTokyo" style=" border-width:0 " width="800" height="400" frameborder="0" scrolling="no"></iframe>
-      %p
-        http://loft.airytail.co/plusone.ics
+    - @calendars.each_with_index do |cal, i|
+      .tab-pane{:class => ("active" if i == 0), :role => "tablist", :id => cal[:id] }
+        %iframe{:frameborder => "0", :height => "400", :scrolling => "no", :src => "https://www.google.com/calendar/embed?showTitle=0&showTz=0&height=400&wkst=1&bgcolor=%23FFFFFF&src=#{cal[:gcal_id]}%40import.calendar.google.com&color=%2323164E&ctz=Asia%2FTokyo", :style => " border-width:0 ", :width => "800"}
+        %p
+          iCalファイル:
+          - url = url_for("/#{cal[:id]}.ics", :full)
+          %a{ :href => url }= url
 
-    .tab-pane{ :role => "tablist", :id => "naked" }
-      <iframe src="https://www.google.com/calendar/embed?showTitle=0&amp;showTz=0&amp;height=400&amp;wkst=1&amp;bgcolor=%23FFFFFF&amp;src=55chha213nm8gflc9bds1fhmah22u0ak%40import.calendar.google.com&amp;color=%23875509&amp;ctz=Asia%2FTokyo" style=" border-width:0 " width="800" height="400" frameborder="0" scrolling="no"></iframe>
-      %p
-        http://loft.airytail.co/naked.ics
+%hr
 
-    .tab-pane{ :role => "tablist", :id => "lofta" }
-      <iframe src="https://www.google.com/calendar/embed?showTitle=0&amp;showTz=0&amp;height=400&amp;wkst=1&amp;bgcolor=%23FFFFFF&amp;src=ofkhgdcg5jnqgq1la74a8u9hh8p5c6o7%40import.calendar.google.com&amp;color=%23875509&amp;ctz=Asia%2FTokyo" style=" border-width:0 " width="800" height="400" frameborder="0" scrolling="no"></iframe>
-      %p
-        http://loft.airytail.co/lofta.ics

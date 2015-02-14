@@ -15,6 +15,16 @@ configure do
 end
 
 get '/' do
+  @calendars = [
+    { :id => "plusone", :name => "ロフトプラスワン", :gcal_id => "ddakjciduejju8u45g3mo02j7nmo720h" },
+    { :id => "naked", :name => "ネイキッドロフト", :gcal_id => "55chha213nm8gflc9bds1fhmah22u0ak" },
+    { :id => "lofta", :name => "阿佐ヶ谷ロフトA", :gcal_id => "ofkhgdcg5jnqgq1la74a8u9hh8p5c6o7" },
+    { :id => "loft", :name => "新宿ロフト", :gcal_id => "vkutn2iash0t80qr02jj6u107lsvk479" },
+    { :id => "shelter", :name => "下北沢シェルター", :gcal_id => "t7mihse06ak6svbfm96csc8ssee1dfvs" },
+    { :id => "west", :name => "プラスワンWest", :gcal_id => "3c1mdb267bgs432oge704s6p8bb0rj61" },
+    { :id => "broadcast", :name => "ロフトチャンネル", :gcal_id => "o86lgu3e3fanc82n7la5p62bcgv1ac24" },
+  ]
+
   haml :index
 end
 
