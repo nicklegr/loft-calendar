@@ -1,13 +1,29 @@
-web:
-  build: .
-  links:
-   - mongodb
-  environment:
-    VIRTUAL_HOST: loft.airytail.co
-  restart: always
-mongodb:
-  image: mongo
-  command: mongod --smallfiles
-  restart: always
-  volumes:
-    - ./mongodb:/data/db
+version: "2"
+
+services:
+  web:
+    build: .
+    environment:
+      VIRTUAL_HOST: loft.airytail.co
+      LETSENCRYPT_HOST: loft.airytail.co
+      LETSENCRYPT_EMAIL: addr.for+letsencrypt@gmail.com
+      # LETSENCRYPT_TEST: "true"
+    restart: unless-stopped
+    networks:
+      - default
+      - nginx-proxy
+  mongodb:
+    image: mongo
+    command: mongod --smallfiles
+    restart: unless-stopped
+    volumes:
+      - mongodb:/data/db
+    networks:
+      - default
+
+volumes:
+  mongodb:
+
+networks:
+  nginx-proxy:
+    external: true
