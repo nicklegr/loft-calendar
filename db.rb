@@ -20,12 +20,7 @@ class Event
 end
 
 Mongoid.configure do |config|
-  if ENV.key?('MONGODB_PORT_27017_TCP_ADDR')
-    # for docker
-    config.sessions = { default: { database: 'loft', hosts: [ "#{ENV['MONGODB_PORT_27017_TCP_ADDR']}:27017" ] }}
-  else
-    config.sessions = { default: { database: 'loft', hosts: [ 'localhost:27017' ] }}
-  end
+  config.sessions = { default: { database: 'loft', hosts: [ 'mongodb:27017' ] }}
 end
 
 Event.create_indexes
